@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-16T07:20:38.222927+00:00",
+  "reports": [
+    {
+      "id": "1150093702826062300073-run-f44f995961364ab3bb5c8f2149a11f6e",
+      "device_id": "1150093702826062300073",
+      "device_name": "Skyworth E6 300073",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "e6-controller-tool",
+      "mode": "formal",
+      "status": "pending",
+      "completed_utc": "2026-10-16T07:01:03.665486+00:00",
+      "pose_count": 16,
+      "position_p95_mm": 9.597130972652772,
+      "position_max_mm": 10.941123142337428,
+      "orientation_p95_deg": 4.01921539405061,
+      "orientation_max_deg": 5.647410583249295,
+      "protocol_profile": "absolute_accuracy_v1",
+      "task_id": "absolute-502e6582d5da497f86ec97851fdc6975",
+      "run_id": "run-f44f995961364ab3bb5c8f2149a11f6e",
+      "report": "reports/1150093702826062300073/run-f44f995961364ab3bb5c8f2149a11f6e/index.html"
+    },
+    {
+      "id": "1150093702826062300073-run-8398b7549e6847f2bbcace63065ef760",
+      "device_id": "1150093702826062300073",
+      "device_name": "Skyworth E6 300073",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "e6-controller-tool",
+      "mode": "smoke",
+      "status": "smoke",
+      "completed_utc": "2026-10-16T05:09:58.431709+00:00",
+      "pose_count": 6,
+      "position_p95_mm": 69.94034493296476,
+      "position_max_mm": 88.7485912276795,
+      "orientation_p95_deg": 3.3388768156831867,
+      "orientation_max_deg": 3.3619907369827713,
+      "protocol_profile": "pipeline_smoke_4x6_v1",
+      "task_id": "absolute-20ffacb471184864a2a5c0813db5a90d",
+      "run_id": "run-8398b7549e6847f2bbcace63065ef760",
+      "report": "reports/1150093702826062300073/run-8398b7549e6847f2bbcace63065ef760/index.html"
+    }
+  ]
+}

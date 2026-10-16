@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="机器人标定与绝对定位精度报告库">
+  <title>设备精度报告库</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Calibration evidence</p>
+      <h1>设备精度报告库</h1>
+    </div>
+    <div class="update" id="updated-at">数据加载中</div>
+  </header>
+  <main>
+    <section class="toolbar" aria-label="报告筛选">
+      <label>
+        <span>设备</span>
+        <select id="device-filter"><option value="">全部设备</option></select>
+      </label>
+      <label>
+        <span>测试类型</span>
+        <select id="mode-filter">
+          <option value="">全部类型</option>
+          <option value="formal">正式测试</option>
+          <option value="smoke">试运行</option>
+        </select>
+      </label>
+      <label class="search-field">
+        <span>搜索</span>
+        <input id="report-search" type="search" placeholder="设备序列号、机械臂或任务编号">
+      </label>
+    </section>
+
+    <section class="summary" aria-label="报告概况">
+      <div><strong id="device-count">0</strong><span>设备</span></div>
+      <div><strong id="report-count">0</strong><span>报告</span></div>
+      <div><strong id="formal-count">0</strong><span>正式测试</span></div>
+      <div><strong id="smoke-count">0</strong><span>试运行</span></div>
+    </section>
+
+    <section class="report-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Reports</p>
+          <h2>测试记录</h2>
+        </div>
+        <span id="visible-count">0 条</span>
+      </div>
+      <div class="report-list" id="report-list" aria-live="polite"></div>
+      <p class="empty" id="empty-state" hidden>没有符合当前筛选条件的报告。</p>
+    </section>
+  </main>
+  <template id="report-template">
+    <article class="report-row">
+      <div class="identity">
+        <span class="status-badge"></span>
+        <div><h3></h3><p class="device-id"></p></div>
+      </div>
+      <div class="context"></div>
+      <div class="measure"><strong class="position"></strong><span>位置 P95</span></div>
+      <div class="measure"><strong class="orientation"></strong><span>姿态 P95</span></div>
+      <div class="measure"><strong class="poses"></strong><span>有效姿态</span></div>
+      <div class="date"></div>
+      <a class="open-report" href="#">查看报告</a>
+    </article>
+  </template>
+  <script src="app.js" defer></script>
+</body>
+</html>
