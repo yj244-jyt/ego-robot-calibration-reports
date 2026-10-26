@@ -1,7 +1,30 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-17T03:21:29.133707+00:00",
+  "generated_utc": "2026-10-26T06:05:29.320064+00:00",
   "reports": [
+    {
+      "id": "QUEST3-run-155f73eef95144baa85bc13a947eb501-static-stage",
+      "device_id": "QUEST3",
+      "device_name": "Meta Quest 3 / 右手柄",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "e6-controller-tool",
+      "mode": "formal",
+      "status": "pending",
+      "completed_utc": "2026-10-26T05:53:44.190975+00:00",
+      "pose_count": 13,
+      "position_p95_mm": 157.28941628536046,
+      "position_max_mm": 230.49675364287668,
+      "orientation_p95_deg": 24.60183992408075,
+      "orientation_max_deg": 55.272747048457745,
+      "protocol_profile": "absolute_accuracy_v1",
+      "test_protocol": "quest3-formal-16drag-8x3speed-v1",
+      "report_kind": "static_stage_partial_report",
+      "task_id": "absolute-5e228b4507c64c268831afe2b3fee0cf",
+      "run_id": "run-155f73eef95144baa85bc13a947eb501-static-stage",
+      "report": "reports/QUEST3/run-155f73eef95144baa85bc13a947eb501-static-stage/index.html"
+    },
     {
       "id": "1150093702826062300073-run-f44f995961364ab3bb5c8f2149a11f6e",
       "device_id": "1150093702826062300073",
