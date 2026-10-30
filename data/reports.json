@@ -1,7 +1,30 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-26T10:44:53.456869+00:00",
+  "generated_utc": "2026-10-30T10:22:22.554991+00:00",
   "reports": [
+    {
+      "id": "1150093702826062300073-run-311075a85e8d45879ed3a9e84d016651-e6-second-test",
+      "device_id": "1150093702826062300073",
+      "device_name": "Skyworth E6 / 右手柄 · 第二次测试",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "e6-controller-tool",
+      "mode": "formal",
+      "status": "fail",
+      "completed_utc": "2026-10-30T10:06:11.036820+00:00",
+      "pose_count": 16,
+      "position_p95_mm": 12.844092246856826,
+      "position_max_mm": 14.239264714283568,
+      "orientation_p95_deg": 6.316195530863697,
+      "orientation_max_deg": 10.671924668757212,
+      "protocol_profile": "absolute_accuracy_v1",
+      "test_protocol": "e6-formal-16-static-v1",
+      "report_kind": "e6_second_test_static_report",
+      "task_id": "absolute-d0c7618060924059bda06a8e82ee81ae",
+      "run_id": "run-311075a85e8d45879ed3a9e84d016651-e6-second-test",
+      "report": "reports/1150093702826062300073/run-311075a85e8d45879ed3a9e84d016651-e6-second-test/index.html"
+    },
     {
       "id": "QUEST3-run-14e36cd53fc2465e9e300266926893bd-quest3-second-test",
       "device_id": "QUEST3",
