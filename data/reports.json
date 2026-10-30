@@ -1,7 +1,30 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-30T10:22:22.554991+00:00",
+  "generated_utc": "2026-10-30T13:42:23+00:00",
   "reports": [
+    {
+      "id": "pico4ultra-run-47b059425a634fc28dd74d906da2144c-pico-second-test",
+      "device_id": "PICO4ULTRA",
+      "device_name": "PICO 4 Ultra / 右手柄 · 第二次测试",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "e6-controller-tool",
+      "mode": "formal",
+      "status": "fail",
+      "completed_utc": "2026-10-30T13:16:48.667992+00:00",
+      "pose_count": 16,
+      "position_p95_mm": 8.15031803805394,
+      "position_max_mm": 11.700959287748816,
+      "orientation_p95_deg": 0.6438402811646091,
+      "orientation_max_deg": 0.6739063890406763,
+      "protocol_profile": "absolute_accuracy_v1",
+      "test_protocol": "pico4-ultra-formal-16-static-v1",
+      "report_kind": "pico4_ultra_second_test_static_report",
+      "task_id": "absolute-62c3ea94479f4b638dee08ca9542737b",
+      "run_id": "run-47b059425a634fc28dd74d906da2144c-pico-second-test",
+      "report": "reports/pico4ultra/run-47b059425a634fc28dd74d906da2144c-pico-second-test/index.html"
+    },
     {
       "id": "1150093702826062300073-run-311075a85e8d45879ed3a9e84d016651-e6-second-test",
       "device_id": "1150093702826062300073",
