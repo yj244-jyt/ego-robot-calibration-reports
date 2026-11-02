@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vive Tracker v5、v6、v7 相对 Flexiv Rizon TCP 的 X 向往复跟随性能对比">
+  <title>Vive Tracker 跟随性能分析 · v5 / v6 / v7</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --ink: #17252a;
+      --muted: #5f7075;
+      --line: #d6e0e1;
+      --surface: #f3f7f7;
+      --green: #176e4a;
+      --green-soft: #eaf5ef;
+      --blue: #155e91;
+      --amber: #a96310;
+      --red: #a13d32;
+      --white: #fff;
+      --v5: #17704c;
+      --v6: #b45722;
+      --v7: #286fa3;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font: 15px/1.58 system-ui, -apple-system, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    button { font: inherit; letter-spacing: 0; }
+
+    a { color: var(--blue); }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 840px; margin-bottom: 12px; font-size: clamp(30px, 5vw, 44px); line-height: 1.08; }
+    h2 { margin-bottom: 12px; font-size: 23px; line-height: 1.25; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow { margin: 0 0 6px; color: var(--green); font-size: 11px; font-weight: 800; text-transform: uppercase; }
+    .lede { max-width: 880px; margin-bottom: 0; color: var(--muted); font-size: 17px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
+    .mono { font-variant-numeric: tabular-nums; }
+
+    header {
+      padding: 34px 0 30px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #f3f8f5 0 58%, #fff 58%);
+    }
+
+    .back-link { display: inline-block; margin-bottom: 26px; color: var(--muted); font-size: 12px; text-decoration: none; }
+    .back-link:hover { color: var(--green); }
+    .status-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .status { padding: 6px 9px; border: 1px solid #78ad96; border-radius: 4px; color: #125d40; background: #edf8f2; font-weight: 750; }
+    .scope { color: var(--muted); font-size: 13px; }
+
+    .headline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 28px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .headline-grid div { min-width: 0; padding: 17px 18px; border-right: 1px solid var(--line); }
+    .headline-grid div:last-child { border-right: 0; }
+    .headline-grid b { display: block; font-size: 25px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+    .headline-grid span { color: var(--muted); font-size: 12px; }
+
+    .jump-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(10px);
+    }
+
+    .jump-nav .wrap { display: flex; gap: 5px; overflow-x: auto; padding: 8px 0; }
+    .jump-nav a { flex: 0 0 auto; padding: 7px 10px; border-radius: 4px; color: var(--muted); font-size: 12px; text-decoration: none; }
+    .jump-nav a:hover { color: var(--green); background: var(--green-soft); }
+
+    main { padding: 12px 0 72px; }
+    .section { padding: 42px 0; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: 0; }
+    .section-intro { max-width: 900px; color: var(--muted); }
+
+    .boundary-grid, .compare-grid, .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+    .boundary, .compare-panel, .method-card { padding: 20px; border: 1px solid var(--line); border-radius: 6px; }
+    .boundary.yes { border-top: 4px solid var(--green); }
+    .boundary.no { border-top: 4px solid var(--amber); }
+    .boundary ul, .compare-panel ul, .method-card ul { margin: 10px 0 0; padding-left: 20px; }
+    .boundary li, .compare-panel li, .method-card li { margin: 6px 0; }
+
+    .run-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .run-card { position: relative; overflow: hidden; padding: 18px; border: 1px solid var(--line); border-radius: 6px; }
+    .run-card::before { position: absolute; inset: 0 auto 0 0; width: 4px; content: ""; background: var(--run-color); }
+    .run-card.v5 { --run-color: var(--v5); }
+    .run-card.v6 { --run-color: var(--v6); }
+    .run-card.v7 { --run-color: var(--v7); }
+    .run-title { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+    .run-title b { font-size: 22px; }
+    .run-title span { color: var(--muted); font-size: 12px; }
+    .run-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 8px; margin-top: 16px; }
+    .run-stats b, .run-stats span { display: block; }
+    .run-stats b { font-size: 18px; font-variant-numeric: tabular-nums; }
+    .run-stats span { color: var(--muted); font-size: 11px; }
+    .scale { height: 5px; margin-top: 18px; background: #e8eeee; }
+    .scale i { display: block; width: var(--scale); height: 100%; background: var(--run-color); }
+
+    .chart-shell { margin-top: 24px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+    .chart-head { display: flex; justify-content: space-between; align-items: end; gap: 18px; padding: 18px 18px 12px; background: var(--surface); }
+    .chart-head p { margin: 0; color: var(--muted); font-size: 12px; }
+    .segmented { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; border: 1px solid #b8c5c7; border-radius: 5px; background: #fff; }
+    .segmented button { min-height: 34px; padding: 0 11px; border: 0; border-radius: 3px; color: var(--muted); background: transparent; cursor: pointer; }
+    .segmented button.active { color: #125d40; background: var(--green-soft); font-weight: 750; }
+    .chart { padding: 22px 18px 16px; }
+    .chart-row { display: grid; grid-template-columns: 138px 1fr; gap: 14px; align-items: center; margin: 16px 0; }
+    .chart-label b, .chart-label span { display: block; }
+    .chart-label span { color: var(--muted); font-size: 11px; }
+    .bars { display: grid; gap: 5px; }
+    .bar-line { display: grid; grid-template-columns: 28px 1fr 68px; gap: 8px; align-items: center; }
+    .bar-line small { color: var(--muted); font-weight: 750; }
+    .bar-track { height: 8px; background: #edf1f2; }
+    .bar-fill { display: block; min-width: 2px; width: var(--width); height: 100%; background: var(--color); transition: width .25s ease; }
+    .bar-value { text-align: right; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .chart-note { padding: 12px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+    .delay-figure { margin: 28px 0 0; padding: 20px; border: 1px solid var(--line); border-radius: 6px; }
+    .delay-axis { position: relative; height: 226px; margin: 24px 26px 4px 92px; border-left: 1px solid #829296; border-bottom: 1px solid #829296; background-image: linear-gradient(to right, #dfe6e7 1px, transparent 1px); background-size: 20% 100%; }
+    .zero-line { position: absolute; top: 0; bottom: 0; left: 80%; width: 2px; background: #a13d32; opacity: .5; }
+    .delay-row { position: absolute; right: 0; left: 0; height: 54px; transform: translateY(-50%); }
+    .delay-row::before { position: absolute; top: 50%; right: 0; left: 0; border-top: 1px dashed #e3e9ea; content: ""; }
+    .delay-name { position: absolute; right: calc(100% + 16px); top: 50%; width: 62px; transform: translateY(-50%); font-weight: 750; text-align: right; }
+    .error-line { position: absolute; top: 50%; left: var(--left); width: var(--error-width); border-top: 2px solid var(--color); transform: translate(-50%, -50%); }
+    .error-line::before, .error-line::after { position: absolute; top: -5px; height: 10px; border-left: 2px solid var(--color); content: ""; }
+    .error-line::before { left: 0; }
+    .error-line::after { right: 0; }
+    .delay-point { position: absolute; top: 50%; left: var(--left); width: 13px; height: 13px; border: 2px solid #fff; border-radius: 50%; background: var(--color); box-shadow: 0 0 0 1px var(--color); transform: translate(-50%, -50%); }
+    .delay-point.xcorr { top: calc(50% + 17px); width: 8px; height: 8px; border: 0; border-radius: 1px; transform: translate(-50%, -50%) rotate(45deg); }
+    .delay-value { position: absolute; top: calc(50% - 26px); left: var(--left); color: var(--color); font-size: 11px; font-weight: 750; transform: translateX(-50%); white-space: nowrap; }
+    .axis-labels { position: relative; height: 24px; margin: 0 26px 0 92px; }
+    .axis-labels span { position: absolute; top: 4px; transform: translateX(-50%); color: var(--muted); font-size: 10px; }
+    .delay-legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 12px; color: var(--muted); font-size: 12px; }
+    .dot, .diamond { display: inline-block; width: 9px; height: 9px; margin-right: 6px; background: var(--green); }
+    .dot { border-radius: 50%; }
+    .diamond { transform: rotate(45deg); }
+
+    .comparison-table, .data-table { width: 100%; margin-top: 18px; border-collapse: collapse; }
+    .comparison-table th, .comparison-table td, .data-table th, .data-table td { padding: 11px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+    .comparison-table th:first-child, .comparison-table td:first-child, .data-table th:first-child, .data-table td:first-child { text-align: left; }
+    .comparison-table thead, .data-table thead { color: var(--muted); font-size: 12px; }
+    .table-wrap { max-width: 100%; overflow-x: auto; }
+    .strong-row { background: #f7faf8; }
+    .blank { color: #a5b0b2; }
+
+    .evidence-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 22px; border: 1px solid var(--line); }
+    .evidence-list div { padding: 16px; border-right: 1px solid var(--line); }
+    .evidence-list div:last-child { border-right: 0; }
+    .evidence-list b, .evidence-list span { display: block; }
+    .evidence-list b { font-size: 21px; font-variant-numeric: tabular-nums; }
+    .evidence-list span { color: var(--muted); font-size: 11px; }
+
+    .callout { margin-top: 22px; padding: 15px 17px; border-left: 4px solid var(--amber); background: #fff8eb; }
+    .callout p:last-child { margin-bottom: 0; }
+    .decision-list { display: grid; gap: 0; margin-top: 20px; border-top: 1px solid var(--line); }
+    .decision { display: grid; grid-template-columns: 38px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .decision b:first-child { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: var(--green); }
+    .decision p { margin: 2px 0 0; color: var(--muted); }
+
+    .metadata { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 20px; border: 1px solid var(--line); }
+    .metadata div { padding: 12px 14px; border-right: 1px solid var(--line); }
+    .metadata div:last-child { border-right: 0; }
+    .metadata span, .metadata b { display: block; }
+    .metadata span { color: var(--muted); font-size: 11px; }
+    .metadata b { overflow-wrap: anywhere; }
+
+    footer { padding: 26px 0; color: var(--muted); background: #183338; font-size: 12px; }
+    footer a { color: #91d9b6; }
+
+    @media (max-width: 800px) {
+      .wrap { width: min(100% - 32px, 1180px); }
+      header { background: #f3f8f5; }
+      .headline-grid, .evidence-list { grid-template-columns: 1fr 1fr; }
+      .headline-grid div:nth-child(2), .evidence-list div:nth-child(2) { border-right: 0; }
+      .headline-grid div:nth-child(-n+2), .evidence-list div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .run-grid { grid-template-columns: 1fr; }
+      .boundary-grid, .compare-grid, .method-grid { grid-template-columns: 1fr; }
+      .chart-head { display: block; }
+      .segmented { margin-top: 12px; }
+      .metadata { grid-template-columns: 1fr 1fr; }
+      .metadata div:nth-child(2) { border-right: 0; }
+      .metadata div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+
+    @media (max-width: 520px) {
+      .headline-grid, .evidence-list, .metadata { grid-template-columns: 1fr; }
+      .headline-grid div, .evidence-list div, .metadata div { border-right: 0; border-bottom: 1px solid var(--line); }
+      .headline-grid div:last-child, .evidence-list div:last-child, .metadata div:last-child { border-bottom: 0; }
+      .chart-row { grid-template-columns: 1fr; gap: 6px; }
+      .bar-line { grid-template-columns: 28px 1fr 60px; }
+      .delay-axis { margin-left: 62px; }
+      .axis-labels { margin-left: 62px; }
+      .delay-name { right: calc(100% + 8px); width: 46px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="back-link" href="../../../index.html">← 返回设备精度报告库</a>
+      <p class="eyebrow">Vive Tracker · relative timing &amp; following residual</p>
+      <h1>Vive Tracker 跟随性能分析：v5 / v6 / v7</h1>
+      <p class="lede">以真实 Vive 源帧为采样基准，对 Robot state 做线性插值，并分别从同墙上时间、互相关补偿和同位置过阈值补偿三个视角审视 X 向往复跟随性能。</p>
+      <div class="status-line">
+        <span class="status">整体轨迹一致</span>
+        <span class="scope">0.2–0.5 m/s · 无无效 Vive 帧 · 未观察到累计漂移</span>
+      </div>
+      <div class="headline-grid" aria-label="关键结论">
+        <div><b>&gt; 0.9999</b><span>三组轨迹相关系数</span></div>
+        <div><b>−3 至 −5 ms</b><span>可观测相对链路偏移</span></div>
+        <div><b>1.40 mm</b><span>v6 过阈值补偿后 RMSE</span></div>
+        <div><b>4.69 mm</b><span>v6 同墙上时间最大绝对误差</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="jump-nav" aria-label="报告章节">
+    <div class="wrap">
+      <a href="#boundary">判断边界</a>
+      <a href="#runs">测试矩阵</a>
+      <a href="#errors">误差对比</a>
+      <a href="#timing">相对时序</a>
+      <a href="#comparison">一致与区别</a>
+      <a href="#quality">数据质量</a>
+      <a href="#method">方法</a>
+      <a href="#verdict">最终判断</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="section" id="boundary">
+      <p class="eyebrow">01 · Decision boundary</p>
+      <h2>这批数据能说明什么</h2>
+      <p class="section-intro">结论严格限定在两条软件数据流的相对表现，不把软件侧读取或发布时间误写成硬件级物理延迟。</p>
+      <div class="boundary-grid">
+        <article class="boundary yes">
+          <h3>可以直接支持</h3>
+          <ul>
+            <li>Vive 稳定复现 TCP 的 X 向往复趋势，三组相关系数均大于 0.9999。</li>
+            <li>0.5 m/s 条件下空间残差高于 0.2 m/s，且时延补偿后差异仍存在。</li>
+            <li>当前可观测 Vive 数据流相对 Robot state 约早 3–5 ms。</li>
+            <li>三组均无无效 Vive 帧、无明显采集断流、无随时间累积漂移。</li>
+          </ul>
+        </article>
+        <article class="boundary no">
+          <h3>不能由当前数据单独证明</h3>
+          <ul>
+            <li>不能证明 Vive 传感器在物理上“提前”看到运动。</li>
+            <li>不能把 v6 的误差增量全部归因于 Vive 的高速动态跟随。</li>
+            <li>不能分离 OpenXR 预测、Robot state 时序、外参、杆臂和结构弹性的独立贡献。</li>
+            <li>不能把 v5、v6、v7 简化为严格的单变量速度扫描。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="runs">
+      <p class="eyebrow">02 · Test matrix</p>
+      <h2>三组条件并非完全等价</h2>
+      <p class="section-intro">v6 与 v7 具有相同的 0.3 m 总对称行程，是最强的速度对照；v5 仅为 0.1 m 行程，更适合作为一致性复核。</p>
+      <div class="run-grid">
+        <article class="run-card v5">
+          <div class="run-title"><b>v5</b><span>中速 · 短行程</span></div>
+          <div class="run-stats">
+            <div><b>0.3 m/s</b><span>设定速度</span></div>
+            <div><b>0.1 m</b><span>总对称行程</span></div>
+            <div><b>1458 / 902</b><span>Robot / Vive 帧数</span></div>
+            <div><b>1.17°</b><span>最大 TCP 姿态变化</span></div>
+          </div>
+          <div class="scale" aria-label="速度相对比例"><i style="--scale:60%"></i></div>
+        </article>
+        <article class="run-card v6">
+          <div class="run-title"><b>v6</b><span>高速 · 长行程</span></div>
+          <div class="run-stats">
+            <div><b>0.5 m/s</b><span>设定速度</span></div>
+            <div><b>0.3 m</b><span>总对称行程</span></div>
+            <div><b>1460 / 901</b><span>Robot / Vive 帧数</span></div>
+            <div><b>2.17°</b><span>最大 TCP 姿态变化</span></div>
+          </div>
+          <div class="scale" aria-label="速度相对比例"><i style="--scale:100%"></i></div>
+        </article>
+        <article class="run-card v7">
+          <div class="run-title"><b>v7</b><span>低速 · 长行程</span></div>
+          <div class="run-stats">
+            <div><b>0.2 m/s</b><span>设定速度</span></div>
+            <div><b>0.3 m</b><span>总对称行程</span></div>
+            <div><b>1458 / 902</b><span>Robot / Vive 帧数</span></div>
+            <div><b>0.94°</b><span>最大 TCP 姿态变化</span></div>
+          </div>
+          <div class="scale" aria-label="速度相对比例"><i style="--scale:40%"></i></div>
+        </article>
+      </div>
+      <div class="metadata" aria-label="未提供的测试元数据">
+        <div><span>测试日期</span><b class="blank">—</b></div>
+        <div><span>Vive Tracker 序列号</span><b class="blank">—</b></div>
+        <div><span>机械臂编号</span><b class="blank">—</b></div>
+        <div><span>OpenXR / 固件版本</span><b class="blank">—</b></div>
+      </div>
+    </section>
+
+    <section class="section" id="errors">
+      <p class="eyebrow">03 · Spatial residuals</p>
+      <h2>用三种对齐口径查看同一组残差</h2>
+      <p class="section-intro">点击对齐方式切换。每行依次显示 MAE、RMSE、P95 和最大绝对误差；数值越小，说明 Vive 与 Robot state 的 X 位移越一致。</p>
+      <div class="chart-shell">
+        <div class="chart-head">
+          <div>
+            <h3>误差轮廓</h3>
+            <p id="chart-description">直接按统一墙上时间配对，包含相对链路时延与空间测量误差。</p>
+          </div>
+          <div class="segmented" role="tablist" aria-label="误差对齐方式">
+            <button class="active" type="button" data-mode="wall" role="tab" aria-selected="true">同墙上时间</button>
+            <button type="button" data-mode="threshold" role="tab" aria-selected="false">过阈值补偿</button>
+            <button type="button" data-mode="xcorr" role="tab" aria-selected="false">互相关补偿</button>
+          </div>
+        </div>
+        <div class="chart" id="metric-chart" aria-live="polite"></div>
+        <div class="chart-note" id="chart-note">当前口径最接近系统直接按时间戳配对时看到的误差；有符号均值为 v5 +0.183 mm、v6 −0.331 mm、v7 −0.351 mm。</div>
+      </div>
+      <div class="evidence-list" aria-label="v6 对 v7 的关键增幅">
+        <div><b>+74.8%</b><span>同墙上时间 RMSE</span></div>
+        <div><b>+102.5%</b><span>过阈值补偿后 RMSE</span></div>
+        <div><b>+85.3%</b><span>同墙上时间 P95</span></div>
+        <div><b>+91.5%</b><span>同墙上时间最大绝对误差</span></div>
+      </div>
+      <div class="callout">
+        <p><strong>最干净的速度对照是 v6 ↔ v7。</strong> 两者行程同为 0.3 m；速度从 0.2 m/s 增至 0.5 m/s 后，过阈值补偿 RMSE 从 0.689 mm 增至 1.395 mm，约为 2.03 倍。</p>
+        <p class="small muted">但 v6 的最大 TCP 姿态变化同时从 0.94° 增至 2.17°，因此这不是纯速度因果实验。</p>
+      </div>
+    </section>
+
+    <section class="section" id="timing">
+      <p class="eyebrow">04 · Relative timing</p>
+      <h2>负值表示 Vive 软件流相对更早</h2>
+      <p class="section-intro">圆点为同位置过阈值时延中位数，横线为其 ±1 标准差；菱形为 5 ms 搜索网格得到的互相关最优点。红线为 0 ms。</p>
+      <figure class="delay-figure">
+        <div class="delay-axis" aria-label="v5 v6 v7 相对时延图，范围负 8 到正 2 毫秒">
+          <div class="zero-line" aria-hidden="true"></div>
+          <div class="delay-row" style="top:18%; --color:var(--v5)">
+            <span class="delay-name">v5</span>
+            <span class="error-line" style="--left:54%; --error-width:32.8%; --color:var(--v5)"></span>
+            <span class="delay-point" style="--left:54%; --color:var(--v5)"></span>
+            <span class="delay-point xcorr" style="--left:30%; --color:var(--v5)" title="互相关 −5.00 ms"></span>
+            <span class="delay-value" style="--left:54%; --color:var(--v5)">−2.60 ms</span>
+          </div>
+          <div class="delay-row" style="top:50%; --color:var(--v6)">
+            <span class="delay-name">v6</span>
+            <span class="error-line" style="--left:45.2%; --error-width:52.2%; --color:var(--v6)"></span>
+            <span class="delay-point" style="--left:45.2%; --color:var(--v6)"></span>
+            <span class="delay-point xcorr" style="--left:30%; --color:var(--v6)" title="互相关 −5.00 ms"></span>
+            <span class="delay-value" style="--left:45.2%; --color:var(--v6)">−3.48 ms</span>
+          </div>
+          <div class="delay-row" style="top:82%; --color:var(--v7)">
+            <span class="delay-name">v7</span>
+            <span class="error-line" style="--left:34.5%; --error-width:63.2%; --color:var(--v7)"></span>
+            <span class="delay-point" style="--left:34.5%; --color:var(--v7)"></span>
+            <span class="delay-point xcorr" style="--left:30%; --color:var(--v7)" title="互相关 −5.00 ms"></span>
+            <span class="delay-value" style="--left:34.5%; --color:var(--v7)">−4.55 ms</span>
+          </div>
+        </div>
+        <div class="axis-labels" aria-hidden="true">
+          <span style="left:0%">−8</span><span style="left:20%">−6</span><span style="left:40%">−4</span><span style="left:60%">−2</span><span style="left:80%">0</span><span style="left:100%">+2 ms</span>
+        </div>
+        <figcaption class="delay-legend"><span><i class="dot"></i>过阈值中位数 ± 标准差</span><span><i class="diamond"></i>互相关最优点</span></figcaption>
+      </figure>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>数据</th><th>互相关时延</th><th>相关系数</th><th>过阈值中位数</th><th>标准差</th><th>事件数</th><th>恒速位移量级</th></tr></thead>
+          <tbody>
+            <tr><td>v5</td><td>−5.00 ms</td><td>0.999920</td><td>−2.60 ms</td><td>1.64 ms</td><td>62</td><td>0.78 mm</td></tr>
+            <tr><td>v6</td><td>−5.00 ms</td><td>0.999974</td><td>−3.48 ms</td><td>2.61 ms</td><td>44</td><td>1.74 mm</td></tr>
+            <tr><td>v7</td><td>−5.00 ms</td><td>0.999995</td><td>−4.55 ms</td><td>3.16 ms</td><td>26</td><td>0.91 mm</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">三组互相关都落在 −5 ms，是因为搜索步长本身为 5 ms。过阈值结果应理解为约 −3 至 −5 ms 的系统级相对时序，而不是精确到小数点后的硬件固定延迟。</p>
+    </section>
+
+    <section class="section" id="comparison">
+      <p class="eyebrow">05 · Shared evidence &amp; small differences</p>
+      <h2>一致点、微小区别与共同可比项</h2>
+      <div class="compare-grid">
+        <article class="compare-panel">
+          <h3>三组一致点</h3>
+          <ul>
+            <li>均完整复现 X 向往复运动，相关系数超过 0.9999。</li>
+            <li>均没有无效 Vive 帧，最大帧间隔均小于 23 ms。</li>
+            <li>两种时延估计均为负值，方向一致。</li>
+            <li>补偿相对时延后 RMSE 均下降，改善范围为 16.7%–36.3%。</li>
+            <li>有符号均值绝对值均小于 0.4 mm，没有明显固定 X 偏置。</li>
+          </ul>
+        </article>
+        <article class="compare-panel">
+          <h3>微小区别</h3>
+          <ul>
+            <li>v7 相关系数最高，但过阈值事件最少、时延离散度最大。</li>
+            <li>v5 的静态初始化平移离散度最低于 v7，但高于 v6。</li>
+            <li>v6 的最大姿态变化为 2.17°，明显高于另外两组。</li>
+            <li>v5 行程仅 0.1 m，循环频率和加减速占比与 v6/v7 不同。</li>
+            <li>v6 空间误差最大，但并未出现额外丢帧或采集断流证据。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="table-wrap">
+        <table class="comparison-table">
+          <thead><tr><th>对比对象</th><th>可共同控制的条件</th><th>最适合回答</th><th>主要混杂因素</th><th>证据强度</th></tr></thead>
+          <tbody>
+            <tr class="strong-row"><td><strong>v6 ↔ v7</strong></td><td>同为 0.3 m 行程</td><td>0.2 → 0.5 m/s 时误差如何变化</td><td>姿态变化 0.94° → 2.17°</td><td>最强</td></tr>
+            <tr><td>v5 ↔ v6</td><td>同一分析链路、近似采样率</td><td>中速短行程与高速长行程的系统表现</td><td>速度与行程同时变化</td><td>有限</td></tr>
+            <tr><td>v5 ↔ v7</td><td>相近误差量级、同一分析链路</td><td>两组低/中速运行的一致性复核</td><td>速度、行程、事件数不同</td><td>有限</td></tr>
+            <tr><td>v5 / v6 / v7</td><td>同类时间统一、插值和残差定义</td><td>链路稳定性、时延符号、数据质量</td><td>测试条件不完全相同</td><td>较强</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="quality">
+      <p class="eyebrow">06 · Data quality</p>
+      <h2>采样连续，静止初始化稳定</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>数据</th><th>Robot / Vive 帧率</th><th>Robot / Vive 帧数</th><th>时钟误差上界</th><th>Robot / Vive 最大帧间隔</th><th>无效 Vive 帧</th></tr></thead>
+          <tbody>
+            <tr><td>v5</td><td>97.19 / 60.00 Hz</td><td>1458 / 902</td><td>0.324 ms</td><td>10.93 / 21.63 ms</td><td>0</td></tr>
+            <tr><td>v6</td><td>97.31 / 60.00 Hz</td><td>1460 / 901</td><td>0.102 ms</td><td>11.00 / 22.96 ms</td><td>0</td></tr>
+            <tr><td>v7</td><td>97.19 / 60.01 Hz</td><td>1458 / 902</td><td>0.131 ms</td><td>11.23 / 21.66 ms</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>数据</th><th>静止配对样本</th><th>平移 P95 离散度</th><th>旋转 P95 离散度</th><th>初始 X 偏差</th><th>capture_error</th></tr></thead>
+          <tbody>
+            <tr><td>v5</td><td>120</td><td>0.493 mm</td><td>0.030°</td><td>−0.014 mm</td><td>空</td></tr>
+            <tr><td>v6</td><td>119</td><td>0.341 mm</td><td>0.023°</td><td>+0.037 mm</td><td>空</td></tr>
+            <tr><td>v7</td><td>119</td><td>0.544 mm</td><td>0.035°</td><td>−0.027 mm</td><td>空</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">T_B_V 初始化没有出现毫米级静态跳变。v6 末段也没有采集断流，因此其较高误差不能用“停止时产生长时间插值”解释。</p>
+    </section>
+
+    <section class="section" id="method">
+      <p class="eyebrow">07 · Analysis method</p>
+      <h2>同一数据，三种观察方式</h2>
+      <div class="method-grid">
+        <article class="method-card">
+          <h3>采样与时间统一</h3>
+          <ul>
+            <li>以每个真实 Vive 源帧为基准。</li>
+            <li>在对应时刻对 Robot state 做线性插值。</li>
+            <li>不把 Vive 插值为更高频的伪帧。</li>
+            <li>通过采集前后时钟交换，把时间统一到 Robot 时钟域。</li>
+          </ul>
+        </article>
+        <article class="method-card">
+          <h3>残差定义</h3>
+          <p><strong>X residual = Vive 相对 X − 对齐到 Vive 帧时刻的 Robot 相对 X</strong></p>
+          <p class="muted">绝对值越小，表示两条轨迹的 X 位移越一致。有符号均值用于检查固定方向偏置。</p>
+        </article>
+        <article class="method-card">
+          <h3>同墙上时间</h3>
+          <p class="muted">直接在 Vive 帧时刻比较插值后的 Robot X 与 Vive X，同时包含相对链路时延和空间测量误差。</p>
+        </article>
+        <article class="method-card">
+          <h3>两种时延补偿</h3>
+          <ul>
+            <li>互相关：5 ms 网格搜索整段轨迹相关性最高的时移。</li>
+            <li>过阈值：比较两条轨迹同方向通过相同 X 阈值的事件时刻，以中位数作为时延。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="metadata" aria-label="未提供的原始材料">
+        <div><span>v5 原始数据链接</span><b class="blank">—</b></div>
+        <div><span>v6 原始数据链接</span><b class="blank">—</b></div>
+        <div><span>v7 原始数据链接</span><b class="blank">—</b></div>
+        <div><span>分析脚本版本</span><b class="blank">—</b></div>
+      </div>
+    </section>
+
+    <section class="section" id="verdict">
+      <p class="eyebrow">08 · Final verdict</p>
+      <h2>最终判断</h2>
+      <div class="decision-list">
+        <div class="decision"><b>1</b><div><strong>运动趋势稳定。</strong><p>在 0.2–0.5 m/s 范围内，Vive Tracker 没有丢失 X 向往复运动趋势，也没有出现明显滞后或累计漂移。</p></div></div>
+        <div class="decision"><b>2</b><div><strong>可观测时序略早。</strong><p>Vive 软件数据流相对 Robot state 约早 3–5 ms；这是系统级相对时序，不是 Vive 绝对传感延迟。</p></div></div>
+        <div class="decision"><b>3</b><div><strong>高速残差仍为毫米级。</strong><p>v6 在 0.5 m/s、0.3 m 行程下，同墙上时间 P95 为 3.371 mm、最大值为 4.685 mm；过阈值补偿后 P95 为 2.642 mm、RMSE 为 1.395 mm。</p></div></div>
+        <div class="decision"><b>4</b><div><strong>误差增大确定，来源占比未分离。</strong><p>动态误差、Robot state 时序、TCP 姿态变化、外参与杆臂误差都可能贡献 v6 的增量。</p></div></div>
+      </div>
+      <div class="callout">
+        <p><strong>下一轮最有价值的改进：</strong>固定 0.3 m 行程与完全相同的 TCP 姿态轨迹，仅扫描速度；同时记录 OpenXR 原生预测时间、主机接收时间和机器人伺服侧时间，并重复多轮估计置信区间。这样才能把“速度效应”与“时序/姿态效应”进一步拆开。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Vive Tracker v5 / v6 / v7 跟随性能对比 · <a href="../../../index.html">设备精度报告库</a></div>
+  </footer>
+
+  <script>
+    const datasets = {
+      wall: {
+        description: "直接按统一墙上时间配对，包含相对链路时延与空间测量误差。",
+        note: "当前口径最接近系统直接按时间戳配对时看到的误差；有符号均值为 v5 +0.183 mm、v6 −0.331 mm、v7 −0.351 mm。",
+        values: { v5: [0.687, 0.841, 1.566, 2.327], v6: [1.560, 1.891, 3.371, 4.685], v7: [0.952, 1.082, 1.819, 2.446] }
+      },
+      threshold: {
+        description: "以同方向经过相同 X 阈值的事件时差中位数补偿相对时序，不受 5 ms 搜索步长量化。",
+        note: "过阈值补偿后三组 RMSE 分别改善 25.4%、26.3% 和 36.3%。",
+        values: { v5: [0.497, 0.628, 1.239, 1.635], v6: [1.163, 1.395, 2.642, 4.259], v7: [0.542, 0.689, 1.325, 2.443] }
+      },
+      xcorr: {
+        description: "在 5 ms 网格上搜索整段轨迹相关性最高的时移，三组最优点均为 −5 ms。",
+        note: "互相关补偿后三组 RMSE 分别改善 16.7%、21.9% 和 36.0%。",
+        values: { v5: [0.594, 0.701, 1.298, 1.822], v6: [1.240, 1.476, 2.652, 4.168], v7: [0.544, 0.692, 1.362, 2.443] }
+      }
+    };
+
+    const metrics = ["MAE", "RMSE", "P95 绝对误差", "最大绝对误差"];
+    const colors = { v5: "var(--v5)", v6: "var(--v6)", v7: "var(--v7)" };
+    const chart = document.querySelector("#metric-chart");
+    const description = document.querySelector("#chart-description");
+    const note = document.querySelector("#chart-note");
+
+    function renderChart(mode) {
+      const dataset = datasets[mode];
+      const max = 5;
+      chart.replaceChildren();
+      metrics.forEach((metric, metricIndex) => {
+        const row = document.createElement("div");
+        row.className = "chart-row";
+        const label = document.createElement("div");
+        label.className = "chart-label";
+        label.innerHTML = `<b>${metric}</b><span>单位：mm</span>`;
+        const bars = document.createElement("div");
+        bars.className = "bars";
+        Object.entries(dataset.values).forEach(([run, values]) => {
+          const value = values[metricIndex];
+          const line = document.createElement("div");
+          line.className = "bar-line";
+          line.innerHTML = `<small>${run}</small><span class="bar-track"><i class="bar-fill" style="--width:${value / max * 100}%;--color:${colors[run]}"></i></span><span class="bar-value">${value.toFixed(3)}</span>`;
+          bars.append(line);
+        });
+        row.append(label, bars);
+        chart.append(row);
+      });
+      description.textContent = dataset.description;
+      note.textContent = dataset.note;
+    }
+
+    document.querySelectorAll("[data-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-mode]").forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-selected", String(active));
+        });
+        renderChart(button.dataset.mode);
+      });
+    });
+
+    renderChart("wall");
+  </script>
+</body>
+</html>

@@ -6,7 +6,15 @@ const reportList = document.querySelector("#report-list");
 const template = document.querySelector("#report-template");
 
 const number = (value, digits = 1) =>
-  Number.isFinite(Number(value)) ? Number(value).toFixed(digits) : "-";
+  value !== null && value !== "" && Number.isFinite(Number(value))
+    ? Number(value).toFixed(digits) : "-";
+
+const metricText = (report, metric, fallbackValue, fallbackUnit, digits) => {
+  const value = report[`${metric}_value`] ?? fallbackValue;
+  const unit = report[`${metric}_unit`] ?? fallbackUnit;
+  const formatted = number(value, digits);
+  return formatted === "-" ? "-" : `${formatted}${unit ? ` ${unit}` : ""}`;
+};
 
 const date = (value) => {
   if (!value) return "日期未记录";
@@ -58,9 +66,16 @@ function renderReports() {
     row.querySelector(".context").textContent = [
       report.robot_name, report.robot_id, report.arm ? `${report.arm} 臂` : null,
     ].filter(Boolean).join(" · ");
-    row.querySelector(".position").textContent = `${number(report.position_p95_mm)} mm`;
-    row.querySelector(".orientation").textContent = `${number(report.orientation_p95_deg, 2)}°`;
-    row.querySelector(".poses").textContent = report.pose_count ?? "-";
+    row.querySelector(".position").textContent = metricText(
+      report, "primary", report.position_p95_mm, "mm", report.primary_digits ?? 1,
+    );
+    row.querySelector(".position + span").textContent = report.primary_label ?? "位置 P95";
+    row.querySelector(".orientation").textContent = metricText(
+      report, "secondary", report.orientation_p95_deg, "°", report.secondary_digits ?? 2,
+    );
+    row.querySelector(".orientation + span").textContent = report.secondary_label ?? "姿态 P95";
+    row.querySelector(".poses").textContent = report.sample_count ?? report.pose_count ?? "-";
+    row.querySelector(".poses + span").textContent = report.sample_label ?? "有效姿态";
     row.querySelector(".date").textContent = date(report.completed_utc);
     row.querySelector(".open-report").href = report.report;
     reportList.append(row);
