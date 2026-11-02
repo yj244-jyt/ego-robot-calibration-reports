@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-11-02T11:40:58.713216+00:00",
+  "id": "e6-six-pose-smoke-test",
+  "device": "Skyworth E6 (6-pose smoke test)",
+  "transport": "usb_cdc",
+  "analysis_mode": "packet_only",
+  "comparison_primary": false,
+  "run_metadata": {
+    "task_id": "absolute-20ffacb471184864a2a5c0813db5a90d",
+    "run_id": "run-8398b7549e6847f2bbcace63065ef760",
+    "test_type": "absolute_accuracy",
+    "pose_set_id": "absolute-accuracy-smoke-6-v1",
+    "round_index": 1,
+    "planned_rounds": 1,
+    "settle_s": 1.0,
+    "dwell_s": 2.0,
+    "tool_name": "e6-controller-tool"
+  },
+  "published_static_mean_mm": 21.837174387423428,
+  "published_trajectory_mean_mm": null,
+  "evidence": {
+    "published_report": {
+      "path": "/home/syb/yitian/ego-robot-calibration-reports/reports/1150093702826062300073/run-8398b7549e6847f2bbcace63065ef760/index.html",
+      "sha256": "b75b004a70fb44c12aa676d171b69b40187960cb0423e435c2fee51a32f3c170",
+      "bytes": 4916365
+    },
+    "source_report": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261016-125920-e3a17d/runs/round-01-attempt-01-2a4bdb/reports/static-pipeline-smoke-analysis-04.json",
+      "sha256": "85756a306e66812e3183b96bd964cd3f09b7fc1491c79d257c721b6c1cb1a18b",
+      "bytes": 1094915
+    },
+    "robot_stream": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261016-125920-e3a17d/runs/round-01-attempt-01-2a4bdb/reports/static-pipeline-smoke-analysis-04-inputs/robot.json",
+      "sha256": "6d17079204a5e8db2acb1a2780069aea42bfb4b1710070008eef540b88ae6405",
+      "bytes": 3119693
+    },
+    "vr_stream": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261016-125920-e3a17d/runs/round-01-attempt-01-2a4bdb/reports/static-pipeline-smoke-analysis-04-inputs/vr.json",
+      "sha256": "6b907610105b812f93fab699a555e1a78ac970b0a23d131ee0e51c914f2dae3c",
+      "bytes": 7938253
+    },
+    "events": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261016-125920-e3a17d/runs/round-01-attempt-01-2a4bdb/processed-markers.json.events.jsonl",
+      "sha256": "2a9f726df87767212277c87363c03fe3fd0dc252a739325ba5169061aa04eebd",
+      "bytes": 6729
+    },
+    "clock_evidence": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261016-125920-e3a17d/runs/round-01-attempt-01-2a4bdb/raw/timesync/e6-cdc-sync.json",
+      "sha256": "5da918732d763f0a0a89a98d0ea0f71d57286119da0dde7ec0942adcd73afe09",
+      "bytes": 214012
+    }
+  },
+  "clock_evidence_summary": {
+    "status": "ready",
+    "protocol": {
+      "control": "adb_forward_websocket_json",
+      "control_command": "start_sync",
+      "timing": "usb_cdc_acm_ntp_four_timestamp",
+      "baud": 2000000
+    },
+    "timestamp_domain": null,
+    "mapping_source": "e6_cdc_ntp_packets",
+    "model": "affine_source_to_session",
+    "exchanges": 680,
+    "accepted_windows": 34,
+    "drift_ppb": -32647.262023506068,
+    "residual_p95_ms": 0.021393465287780765,
+    "capture": {
+      "start_host_ns": 1792126766304734311,
+      "end_host_ns": 1792126898297198962,
+      "pre_roll_s": 40.0
+    },
+    "claim": null
+  },
+  "audit": {
+    "schema_version": 1,
+    "kind": "timing_alignment_packet_audit",
+    "status": "packet_only",
+    "robot_stream": {
+      "records": 1322,
+      "valid_records": 1322,
+      "timestamp_model": "host_midpoint",
+      "timestamp_domain": "utc",
+      "duration_s": 132.250166866,
+      "timestamp_reversals": 0,
+      "timestamp_duplicates": 0,
+      "sequence_reversals": 0,
+      "sequence_duplicates": 0,
+      "nominal_sequence_step": 1,
+      "sequence_discontinuities": 0,
+      "source_timestamp_available": false,
+      "source_timestamp_nonzero_records": 0,
+      "interval_ms": {
+        "minimum": 100.002168,
+        "median": 100.094561,
+        "p95": 100.235098,
+        "maximum": 103.004179
+      },
+      "query_latency_ms": {
+        "minimum": 0.002072,
+        "median": 0.0029324999999999998,
+        "p95": 0.004364400000000001,
+        "maximum": 0.007562999999999999
+      },
+      "source_to_host_affine": {
+        "available": false
+      },
+      "qa_summary": {
+        "accepted": 1322,
+        "rejected": 0,
+        "valid_ratio": 1.0,
+        "effective_rate_hz": 9.988645241850456,
+        "max_gap_ns": 250000000,
+        "interval_std_ms": 0.09570944776485868,
+        "reason_counts": {},
+        "fatal": [],
+        "gap_count": 0
+      }
+    },
+    "vr_stream": {
+      "records": 3962,
+      "valid_records": 3962,
+      "timestamp_model": "nearest_render_pose_relabelled_rgb",
+      "timestamp_domain": "utc",
+      "duration_s": 132.02902297600002,
+      "timestamp_reversals": 0,
+      "timestamp_duplicates": 0,
+      "sequence_reversals": 0,
+      "sequence_duplicates": 1,
+      "nominal_sequence_step": 2,
+      "sequence_discontinuities": 5,
+      "source_timestamp_available": true,
+      "source_timestamp_nonzero_records": 3962,
+      "interval_ms": {
+        "minimum": 33.331967999999996,
+        "median": 33.332224,
+        "p95": 33.33248,
+        "maximum": 33.33248
+      },
+      "query_latency_ms": {},
+      "source_to_host_affine": {
+        "available": true,
+        "samples": 3962,
+        "source_reversals": 0,
+        "source_duplicates": 0,
+        "slope": 0.9999673527209831,
+        "drift_ppb": -32647.27901686193,
+        "intercept_ns_relative_epochs": 111,
+        "residual_ms": {
+          "minimum": 0.0,
+          "median": 0.0,
+          "p95": 0.000256,
+          "maximum": 0.000256
+        }
+      },
+      "qa_summary": {
+        "accepted": 3962,
+        "rejected": 0,
+        "valid_ratio": 1.0,
+        "effective_rate_hz": 30.000979411322486,
+        "max_gap_ns": 100000000,
+        "interval_std_ms": 0.00016402060958218762,
+        "reason_counts": {},
+        "fatal": [],
+        "gap_count": 3961
+      }
+    },
+    "limitations": [
+      "no frozen calibration matrix was available for trajectory recomputation",
+      "packet timing evidence is not an absolute-accuracy result"
+    ]
+  },
+  "timing_grade": "B · mapped device clock, pose age unresolved",
+  "speed_matched": null
+}

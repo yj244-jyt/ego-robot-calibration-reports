@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-11-02T11:40:58.713216+00:00",
+  "id": "quest3-partial-first-test",
+  "device": "Meta Quest 3 (partial first test)",
+  "transport": "webpage_webxr",
+  "analysis_mode": "full",
+  "comparison_primary": false,
+  "run_metadata": {
+    "task_id": "absolute-5e228b4507c64c268831afe2b3fee0cf",
+    "run_id": "run-155f73eef95144baa85bc13a947eb501-static-stage",
+    "test_type": "absolute_accuracy",
+    "pose_set_id": "quest3-formal-16drag-8x3speed-v1",
+    "execution_method": "quest3_16drag_8x3speed_explicit_endpoints_v1",
+    "vr_device": "quest3",
+    "round_index": 1,
+    "planned_rounds": 1,
+    "settle_s": 1.0,
+    "dwell_s": 2.0,
+    "tool_name": "e6-controller-tool",
+    "static_trial_count": 16,
+    "speed_trajectory_count": 8,
+    "speed_replay_count": 24,
+    "execution_status": "partial_static_complete_speed_pending",
+    "captured_utc": "2026-10-26T05:47:29.504678+00:00",
+    "completed_utc": "2026-10-26T05:53:44.190975+00:00",
+    "source_capture": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261026-134223-e0d8d0/runs/round-01-attempt-02-25ddc8",
+    "excluded_speed_rows": 3,
+    "speed_report_policy": "reserved_empty_pending_future_test"
+  },
+  "published_static_mean_mm": 32.45941099015997,
+  "published_trajectory_mean_mm": null,
+  "evidence": {
+    "published_report": {
+      "path": "/home/syb/yitian/ego-robot-calibration-reports/reports/QUEST3/run-155f73eef95144baa85bc13a947eb501-static-stage/index.html",
+      "sha256": "bc289f87e69652e7d92e77edfe749990cbfc77eb7cf0172ff84849152f1cdfda",
+      "bytes": 20597333
+    },
+    "source_report": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261026-134223-e0d8d0/runs/round-01-attempt-02-25ddc8/reports/static-only-stage/quest3-static-stage-report-v2.json",
+      "sha256": "01d870d3b8272188c3412c144670cda47c8d3484c4e7bfe0bfbf0009c52c3ded",
+      "bytes": 45769
+    },
+    "robot_stream": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261026-134223-e0d8d0/runs/round-01-attempt-02-25ddc8/reports/static-only-stage/quest3-static-stage-report-v2-inputs/robot.json",
+      "sha256": "c6476fbb158e19ecc4c3ef5a355a3efffa0c4c1b12920d5c8e68ac9e0363ad17",
+      "bytes": 66492940
+    },
+    "vr_stream": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261026-134223-e0d8d0/runs/round-01-attempt-02-25ddc8/reports/static-only-stage/quest3-static-stage-report-v2-inputs/vr.json",
+      "sha256": "163c20a994c7b86503ca51c240a34a62034539700cf24f94bf5e544110a6daff",
+      "bytes": 30155438
+    },
+    "events": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-absolute-accuracy-task-20261026-134223-e0d8d0/runs/round-01-attempt-02-25ddc8/reports/static-only-stage/processed-markers-static.json.events.jsonl",
+      "sha256": "3d4569a5cc1a4f2c886b3f8e184208fec4db5098110cac12762ec6e00ad1a306",
+      "bytes": 8983
+    },
+    "calibration": {
+      "path": "/home/syb/yitian/ego-robot-calibration/runs/gui-calibration-20261026-133810-8e6f69/calibration/package.json",
+      "sha256": "46a2cee0a9b74bbeab0f1d2e99968ac19c369aaaf0277b1d6198f8770f1540c2",
+      "bytes": 28785
+    }
+  },
+  "clock_evidence_summary": null,
+  "audit": {
+    "schema_version": 1,
+    "kind": "timing_alignment_audit",
+    "status": "inconclusive",
+    "shift_convention": "corrected_vr_timestamp = recorded_vr_timestamp + shift_ms",
+    "config": {
+      "minimum_shift_ms": -500.0,
+      "maximum_shift_ms": 500.0,
+      "shift_step_ms": 5.0,
+      "maximum_audit_rate_hz": 50.0,
+      "minimum_motion_mps": 0.01,
+      "common_rate_hz": 5.0,
+      "bootstrap_samples": 2000,
+      "sensitivity_minimum_ms": -200.0,
+      "sensitivity_maximum_ms": 200.0,
+      "sensitivity_step_ms": 20.0
+    },
+    "robot_stream": {
+      "records": 28033,
+      "valid_records": 28033,
+      "timestamp_model": "host_midpoint",
+      "timestamp_domain": "utc",
+      "duration_s": 282.492936089,
+      "timestamp_reversals": 0,
+      "timestamp_duplicates": 0,
+      "sequence_reversals": 0,
+      "sequence_duplicates": 0,
+      "nominal_sequence_step": 1,
+      "sequence_discontinuities": 0,
+      "source_timestamp_available": false,
+      "source_timestamp_nonzero_records": 0,
+      "interval_ms": {
+        "minimum": 6.762048999999999,
+        "median": 10.069362,
+        "p95": 10.1701318,
+        "maximum": 13.359893
+      },
+      "query_latency_ms": {
+        "minimum": 0.001152,
+        "median": 0.002585,
+        "p95": 0.0035453999999999976,
+        "maximum": 0.124888
+      },
+      "source_to_host_affine": {
+        "available": false
+      },
+      "qa_summary": {
+        "accepted": 28033,
+        "rejected": 0,
+        "valid_ratio": 1.0,
+        "effective_rate_hz": 99.23079984969414,
+        "max_gap_ns": 250000000,
+        "interval_std_ms": 0.0720683142206891,
+        "reason_counts": {},
+        "fatal": [],
+        "gap_count": 0
+      }
+    },
+    "vr_stream": {
+      "records": 13589,
+      "valid_records": 13589,
+      "timestamp_model": "host_receive_latest_webxr_pose",
+      "timestamp_domain": "utc",
+      "duration_s": 285.82788731600004,
+      "timestamp_reversals": 0,
+      "timestamp_duplicates": 0,
+      "sequence_reversals": 0,
+      "sequence_duplicates": 0,
+      "nominal_sequence_step": 1,
+      "sequence_discontinuities": 0,
+      "source_timestamp_available": false,
+      "source_timestamp_nonzero_records": 0,
+      "interval_ms": {
+        "minimum": 16.872942,
+        "median": 17.1107825,
+        "p95": 34.07665085,
+        "maximum": 135.628299
+      },
+      "query_latency_ms": {},
+      "source_to_host_affine": {
+        "available": false
+      },
+      "qa_summary": {
+        "accepted": 13589,
+        "rejected": 0,
+        "valid_ratio": 1.0,
+        "effective_rate_hz": 47.53909818805625,
+        "max_gap_ns": 250000000,
+        "interval_std_ms": 8.195141398286125,
+        "reason_counts": {},
+        "fatal": [],
+        "gap_count": 0
+      }
+    },
+    "segment_shift_estimates": [],
+    "shift_statistics": {
+      "candidate_segments": 0,
+      "usable_segments": 0,
+      "median_shift_ms": null,
+      "shift_iqr_ms": null,
+      "minimum_shift_ms": null,
+      "maximum_shift_ms": null,
+      "median_score": null
+    },
+    "cross_validation": {
+      "folds": [],
+      "accepted_on_all_folds": false
+    },
+    "baseline_native_rate": {
+      "shift_ms_added_to_vr_timestamps": 0.0,
+      "rate_hz": 58.44268080667848,
+      "maximum_gap_ms": null,
+      "segments": [],
+      "trajectory_count": 0,
+      "valid_samples": 0,
+      "position_mm": {},
+      "orientation_deg": {},
+      "equal_segment_weight": {
+        "position_mean_mm": null,
+        "position_mean_95_ci_mm": {},
+        "orientation_mean_deg": null,
+        "orientation_mean_95_ci_deg": {}
+      },
+      "position_error_by_robot_speed_mps": {
+        "0.00-0.05": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        "0.05-0.10": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        "0.10-0.15": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        "0.15-0.20": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        ">=0.20": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        }
+      }
+    },
+    "corrected_native_rate": null,
+    "baseline_common_5hz": {
+      "shift_ms_added_to_vr_timestamps": 0.0,
+      "rate_hz": 5.0,
+      "maximum_gap_ms": 250.0,
+      "segments": [],
+      "trajectory_count": 0,
+      "valid_samples": 0,
+      "position_mm": {},
+      "orientation_deg": {},
+      "equal_segment_weight": {
+        "position_mean_mm": null,
+        "position_mean_95_ci_mm": {},
+        "orientation_mean_deg": null,
+        "orientation_mean_95_ci_deg": {}
+      },
+      "position_error_by_robot_speed_mps": {
+        "0.00-0.05": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        "0.05-0.10": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        "0.10-0.15": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        "0.15-0.20": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        },
+        ">=0.20": {
+          "samples": 0,
+          "mean_mm": null,
+          "p95_mm": null
+        }
+      }
+    },
+    "corrected_common_5hz": null,
+    "common_5hz_shift_sensitivity": [],
+    "limitations": [
+      "effective motion lag does not prove a native device sampling timestamp",
+      "constant clock offset and constant pose age are not separately identifiable without source clock evidence",
+      "results remain diagnostic when Robot or VR native pose timestamps are unavailable"
+    ]
+  },
+  "timing_grade": "C · host receipt only",
+  "speed_matched": null
+}

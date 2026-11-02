@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-11-02T11:40:58.713216+00:00",
+  "manifest": "/home/syb/yitian/ego-robot-calibration/configs/timing_audit/published_hand_controller_runs.json",
+  "manifest_sha256": "b6f6fe3e02869a95e9cdb584cf80f43daf56f679b0971e666210f9319a4c6c2d",
+  "site_report_count": 8,
+  "audited_hand_controller_report_count": 7,
+  "common_speed_bins_mps": [
+    "0.00-0.05",
+    "0.05-0.10",
+    "0.10-0.15",
+    "0.15-0.20",
+    ">=0.20"
+  ],
+  "site_exclusions": [
+    {
+      "id": "vive-tracker-v5-v7",
+      "device": "Vive Tracker",
+      "published_report": "../ego-robot-calibration-reports/reports/VIVE_TRACKER/v5-v7-following-performance/index.html",
+      "reason": "relative X-axis following protocol; no standardized Robot/hand-controller absolute-pose streams"
+    }
+  ],
+  "results": [
+    {
+      "id": "quest3-second-test",
+      "device": "Meta Quest 3",
+      "transport": "webpage_webxr",
+      "timing_grade": "C · host receipt only",
+      "analysis_mode": "full",
+      "comparison_primary": true,
+      "audit_file": "quest3-second-test.json",
+      "status": "effective_shift_supported",
+      "speed_matched": {
+        "position_mean_mm": 10.067862513622238,
+        "included_bins_mps": [
+          "0.00-0.05",
+          "0.05-0.10",
+          "0.10-0.15",
+          "0.15-0.20",
+          ">=0.20"
+        ],
+        "method": "equal weight over speed bins with at least 20 samples per device"
+      }
+    },
+    {
+      "id": "pico4ultra-second-test",
+      "device": "PICO 4 Ultra",
+      "transport": "webpage_webxr",
+      "timing_grade": "C · host receipt only",
+      "analysis_mode": "full",
+      "comparison_primary": true,
+      "audit_file": "pico4ultra-second-test.json",
+      "status": "shift_candidate_not_cross_validated",
+      "speed_matched": {
+        "position_mean_mm": 8.085409761923971,
+        "included_bins_mps": [
+          "0.00-0.05",
+          "0.05-0.10",
+          "0.10-0.15",
+          "0.15-0.20",
+          ">=0.20"
+        ],
+        "method": "equal weight over speed bins with at least 20 samples per device"
+      }
+    },
+    {
+      "id": "e6-second-test",
+      "device": "Skyworth E6",
+      "transport": "usb_cdc",
+      "timing_grade": "B · mapped device clock, pose age unresolved",
+      "analysis_mode": "full",
+      "comparison_primary": true,
+      "audit_file": "e6-second-test.json",
+      "status": "shift_candidate_not_cross_validated",
+      "speed_matched": {
+        "position_mean_mm": 9.55194536614646,
+        "included_bins_mps": [
+          "0.00-0.05",
+          "0.05-0.10",
+          "0.10-0.15",
+          "0.15-0.20",
+          ">=0.20"
+        ],
+        "method": "equal weight over speed bins with at least 20 samples per device"
+      }
+    },
+    {
+      "id": "dpvr-first-test",
+      "device": "DPVR SDK4",
+      "transport": "usb_native_sdk",
+      "timing_grade": "B · shared host query time, native freshness available",
+      "analysis_mode": "full",
+      "comparison_primary": true,
+      "audit_file": "dpvr-first-test.json",
+      "status": "shift_candidate_not_cross_validated",
+      "speed_matched": {
+        "position_mean_mm": 3.5368968386802635,
+        "included_bins_mps": [
+          "0.00-0.05",
+          "0.05-0.10",
+          "0.10-0.15",
+          "0.15-0.20",
+          ">=0.20"
+        ],
+        "method": "equal weight over speed bins with at least 20 samples per device"
+      }
+    },
+    {
+      "id": "quest3-partial-first-test",
+      "device": "Meta Quest 3 (partial first test)",
+      "transport": "webpage_webxr",
+      "timing_grade": "C · host receipt only",
+      "analysis_mode": "full",
+      "comparison_primary": false,
+      "audit_file": "quest3-partial-first-test.json",
+      "status": "inconclusive",
+      "speed_matched": null
+    },
+    {
+      "id": "e6-first-complete-test",
+      "device": "Skyworth E6 (first complete test)",
+      "transport": "usb_cdc",
+      "timing_grade": "B · mapped device clock, pose age unresolved",
+      "analysis_mode": "full",
+      "comparison_primary": false,
+      "audit_file": "e6-first-complete-test.json",
+      "status": "shift_candidate_not_cross_validated",
+      "speed_matched": null
+    },
+    {
+      "id": "e6-six-pose-smoke-test",
+      "device": "Skyworth E6 (6-pose smoke test)",
+      "transport": "usb_cdc",
+      "timing_grade": "B · mapped device clock, pose age unresolved",
+      "analysis_mode": "packet_only",
+      "comparison_primary": false,
+      "audit_file": "e6-six-pose-smoke-test.json",
+      "status": "packet_only",
+      "speed_matched": null
+    }
+  ]
+}
