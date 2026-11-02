@@ -69,13 +69,13 @@ function renderReports() {
       report.robot_name, report.robot_id, report.arm ? `${report.arm} 臂` : null,
     ].filter(Boolean).join(" · ");
     row.querySelector(".position").textContent = metricText(
-      report, "primary", report.position_p95_mm, "mm", report.primary_digits ?? 1,
+      report, "primary", report.position_mean_mm, "mm", report.primary_digits ?? 1,
     );
-    row.querySelector(".position + span").textContent = report.primary_label ?? "轨迹位置 P95";
+    row.querySelector(".position + span").textContent = report.primary_label ?? "轨迹平均平移误差";
     row.querySelector(".orientation").textContent = metricText(
-      report, "secondary", report.orientation_p95_deg, "°", report.secondary_digits ?? 2,
+      report, "secondary", report.orientation_mean_deg, "°", report.secondary_digits ?? 2,
     );
-    row.querySelector(".orientation + span").textContent = report.secondary_label ?? "轨迹姿态 P95";
+    row.querySelector(".orientation + span").textContent = report.secondary_label ?? "轨迹平均旋转误差";
     row.querySelector(".poses").textContent = report.sample_count ?? report.pose_count ?? "-";
     row.querySelector(".poses + span").textContent = report.sample_label ?? "轨迹样本";
     row.querySelector(".date").textContent = date(report.completed_utc);
