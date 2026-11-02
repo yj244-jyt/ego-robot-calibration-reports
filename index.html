@@ -51,7 +51,7 @@
         </div>
         <span id="visible-count">0 条</span>
       </div>
-      <p class="catalog-note">常规精度报告的目录指标统一采用未过滤连续轨迹统计：平均平移误差、平均旋转误差和同步样本数。缺少可比轨迹汇总的报告显示为空值；P95、RMSE、最大值和去异常值结果请进入报告查看。Vive 跟随报告使用卡片上单独标注的动态平均误差。</p>
+      <p class="catalog-note">常规精度报告的目录指标统一采用逐段首帧 SE(3) 对齐后的未过滤连续轨迹相对误差：平均平移、平均旋转和同步样本数。对齐前首帧 gap 单独保留，不计入轨迹统计；静止绝对误差、P95、RMSE、最大值和去异常值结果请进入报告查看。缺少可信原始数据、冻结标定或事件窗口的报告显示为空值。</p>
       <div class="report-list" id="report-list" aria-live="polite"></div>
       <p class="empty" id="empty-state" hidden>没有符合当前筛选条件的报告。</p>
     </section>
