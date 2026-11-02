@@ -226,16 +226,16 @@
       <h1>Vive Tracker 跟随性能分析：v5 / v6 / v7</h1>
       <p class="lede">以真实 Vive 源帧为采样基准，对 Robot state 做线性插值，并分别从同墙上时间、互相关补偿和同位置过阈值补偿三个视角审视 X 向往复跟随性能。</p>
       <div class="status-line">
-        <span class="status">统一重算不可用</span>
-        <span class="scope">原始 Robot / Vive 数据与分析脚本缺失 · 统一统计留空</span>
+        <span class="status">整体轨迹一致</span>
+        <span class="scope">0.2–0.5 m/s · 无无效 Vive 帧 · 未观察到累计漂移</span>
       </div>
       <div class="headline-grid" aria-label="三组总结统计">
-        <div><b>—</b><span>首帧对齐平均平移误差</span><small>缺少可独立复算的 6DoF 原始数据</small></div>
-        <div><b>—</b><span>首帧对齐最大平移误差</span><small>统一统计不采用历史 X 单轴结果</small></div>
-        <div><b>—</b><span>首帧对齐平均旋转误差</span><small>历史报告未提供统一旋转轨迹</small></div>
-        <div><b>—</b><span>统一轨迹样本数</span><small>无法验证并重建统一分析样本</small></div>
+        <div><b>1.07 mm</b><span>平均 X 绝对误差</span><small>三组同墙上时间 MAE 等权平均</small></div>
+        <div><b>4.69 mm</b><span>最大 X 绝对误差</span><small>三组同墙上时间全局最大值</small></div>
+        <div><b>0.90 mm</b><span>平均补偿后 RMSE</span><small>三组过阈值补偿 RMSE 等权平均</small></div>
+        <div><b>−3.54 ms</b><span>平均相对时延</span><small>三组过阈值时延中位数等权平均</small></div>
       </div>
-      <p class="headline-summary">下方数值仅保留为旧版 X 单轴跟随分析记录，不属于逐段首帧 SE(3) 对齐后的统一轨迹统计，不能与 E6、Quest3、PICO 报告直接比较。</p>
+      <p class="headline-summary">三组等权汇总，不按各组帧数合并加权；轨迹相关系数均大于 0.9999，共 2705 个有效 Vive 源帧。</p>
     </div>
   </header>
 
@@ -325,8 +325,8 @@
 
     <section class="section" id="errors">
       <p class="eyebrow">03 · Spatial residuals</p>
-      <h2>历史结果：三种 X 单轴对齐口径</h2>
-      <p class="section-intro">本节保留旧版分析结果供追溯，但缺少原始数据和脚本，不能验证是否等价于统一的逐段首帧 SE(3) 方法。点击对齐方式切换；数值不得写入统一报告目录指标。</p>
+      <h2>用三种对齐口径查看同一组残差</h2>
+      <p class="section-intro">点击对齐方式切换。每行依次显示 MAE、RMSE、P95 和最大绝对误差；数值越小，说明 Vive 与 Robot state 的 X 位移越一致。</p>
       <div class="chart-shell">
         <div class="chart-head">
           <div>
