@@ -10,7 +10,9 @@ const number = (value, digits = 1) =>
     ? Number(value).toFixed(digits) : "-";
 
 const metricText = (report, metric, fallbackValue, fallbackUnit, digits) => {
-  const value = report[`${metric}_value`] ?? fallbackValue;
+  const valueKey = `${metric}_value`;
+  const value = Object.prototype.hasOwnProperty.call(report, valueKey)
+    ? report[valueKey] : fallbackValue;
   const unit = report[`${metric}_unit`] ?? fallbackUnit;
   const formatted = number(value, digits);
   return formatted === "-" ? "-" : `${formatted}${unit ? ` ${unit}` : ""}`;
@@ -69,13 +71,13 @@ function renderReports() {
     row.querySelector(".position").textContent = metricText(
       report, "primary", report.position_p95_mm, "mm", report.primary_digits ?? 1,
     );
-    row.querySelector(".position + span").textContent = report.primary_label ?? "位置 P95";
+    row.querySelector(".position + span").textContent = report.primary_label ?? "轨迹位置 P95";
     row.querySelector(".orientation").textContent = metricText(
       report, "secondary", report.orientation_p95_deg, "°", report.secondary_digits ?? 2,
     );
-    row.querySelector(".orientation + span").textContent = report.secondary_label ?? "姿态 P95";
+    row.querySelector(".orientation + span").textContent = report.secondary_label ?? "轨迹姿态 P95";
     row.querySelector(".poses").textContent = report.sample_count ?? report.pose_count ?? "-";
-    row.querySelector(".poses + span").textContent = report.sample_label ?? "有效姿态";
+    row.querySelector(".poses + span").textContent = report.sample_label ?? "轨迹样本";
     row.querySelector(".date").textContent = date(report.completed_utc);
     row.querySelector(".open-report").href = report.report;
     reportList.append(row);
