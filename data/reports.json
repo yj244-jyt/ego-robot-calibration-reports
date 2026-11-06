@@ -1,7 +1,28 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-11-06T14:56:40.950852+00:00",
+  "generated_utc": "2026-11-06T16:15:32.991072+00:00",
   "reports": [
+    {
+      "id": "1150093702826062300073-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
+      "device_id": "1150093702826062300073",
+      "device_name": "创维 E6 300073",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "e6-controller-tool",
+      "mode": "formal",
+      "status": "pending",
+      "completed_utc": "2026-11-06T16:13:56.568345+00:00",
+      "pose_count": 16,
+      "position_p95_mm": 44.00443994254594,
+      "position_max_mm": 95.38725336447627,
+      "orientation_p95_deg": null,
+      "orientation_max_deg": null,
+      "protocol_profile": "sinusoidal_velocity_diagnostic_v2",
+      "task_id": "sinusoidal-skyworth_e6-velocity-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
+      "run_id": "run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
+      "report": "reports/1150093702826062300073/run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2/index.html"
+    },
     {
       "id": "rhzc1ks3802-run-dpvr-sinusoidal-velocity-20261106-27pt",
       "device_id": "RHZC1KS3802",
