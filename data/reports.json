@@ -1,7 +1,28 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-11-06T10:11:52.016526+00:00",
+  "generated_utc": "2026-11-06T14:56:40.950852+00:00",
   "reports": [
+    {
+      "id": "rhzc1ks3802-run-dpvr-sinusoidal-velocity-20261106-27pt",
+      "device_id": "RHZC1KS3802",
+      "device_name": "大朋 DPVR / SDK4 右手柄 KS3802",
+      "robot_name": "Flexiv Rizon dual arm",
+      "robot_id": "Rizon 4-063079",
+      "arm": "right",
+      "tool_name": "dpvr-sdk4-right-controller",
+      "mode": "formal",
+      "status": "pending",
+      "completed_utc": "2026-11-06T14:56:22.825827+00:00",
+      "pose_count": 27,
+      "position_p95_mm": 43.928585801192085,
+      "position_max_mm": 98.55386526642886,
+      "orientation_p95_deg": null,
+      "orientation_max_deg": null,
+      "protocol_profile": "sinusoidal_velocity_diagnostic_v2",
+      "task_id": "sinusoidal-dpvr-sinusoidal-velocity-run-dpvr-sinusoidal-velocity-20261106-27pt",
+      "run_id": "run-dpvr-sinusoidal-velocity-20261106-27pt",
+      "report": "reports/rhzc1ks3802/run-dpvr-sinusoidal-velocity-20261106-27pt/index.html"
+    },
     {
       "id": "rhzc1ks3802-run-dpvr-sinusoidal-velocity-20261106",
       "device_id": "RHZC1KS3802",
