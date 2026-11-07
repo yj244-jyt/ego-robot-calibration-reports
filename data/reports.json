@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-11-07T06:37:17.690150+00:00",
+  "generated_utc": "2026-11-07T07:09:13.173047+00:00",
   "reports": [
     {
       "id": "1150093702826062300073-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
@@ -16,12 +16,14 @@
       "pose_count": 16,
       "position_p95_mm": 44.00443994254594,
       "position_max_mm": 95.38725336447627,
-      "orientation_p95_deg": null,
-      "orientation_max_deg": null,
+      "orientation_p95_deg": 1.8695901307244733,
+      "orientation_max_deg": 2.064599455641845,
       "protocol_profile": "sinusoidal_velocity_diagnostic_v2",
       "task_id": "sinusoidal-skyworth_e6-velocity-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
       "run_id": "run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
-      "report": "reports/1150093702826062300073/run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2/index.html"
+      "report": "reports/1150093702826062300073/run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2/index.html",
+      "position_mean_mm": 21.57874207099677,
+      "orientation_mean_deg": 0.8685161937334938
     },
     {
       "id": "rhzc1ks3802-run-dpvr-sinusoidal-velocity-20261106-27pt",
@@ -37,12 +39,14 @@
       "pose_count": 27,
       "position_p95_mm": 43.928585801192085,
       "position_max_mm": 98.55386526642886,
-      "orientation_p95_deg": null,
-      "orientation_max_deg": null,
+      "orientation_p95_deg": 1.3454538395692421,
+      "orientation_max_deg": 1.5365361431069011,
       "protocol_profile": "sinusoidal_velocity_diagnostic_v2",
       "task_id": "sinusoidal-dpvr_sdk4-velocity-run-dpvr-sinusoidal-velocity-20261106-27pt",
       "run_id": "run-dpvr-sinusoidal-velocity-20261106-27pt",
-      "report": "reports/rhzc1ks3802/run-dpvr-sinusoidal-velocity-20261106-27pt/index.html"
+      "report": "reports/rhzc1ks3802/run-dpvr-sinusoidal-velocity-20261106-27pt/index.html",
+      "position_mean_mm": 11.923280529441467,
+      "orientation_mean_deg": 0.6830853650978405
     },
     {
       "id": "TIMING_ALIGNMENT_AUDIT-20261102",
