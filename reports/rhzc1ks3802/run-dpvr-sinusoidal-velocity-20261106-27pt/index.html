@@ -13,9 +13,11 @@
 .velocity-summary{border:1px solid var(--line);background:#f8fafb;padding:18px;margin:18px 0 26px}
 .velocity-summary p:last-child{margin-bottom:0}.status-fail{border-color:#d59a96;background:#fff1f0;color:#8d2822}
 .nowrap{white-space:nowrap}.audit-table td:last-child,.audit-table th:last-child{text-align:left}
+.report-context{margin:6px 0 12px;color:var(--muted);font-size:12px}.formula-list li{margin:9px 0}
 </style></head><body><main>
 <div class="eyebrow">DPVR · sinusoidal velocity evidence</div>
 <h1>大朋 DPVR / 右手柄 · 正弦波线速度测试 · 第二次测试</h1>
+<p class="report-context">实验环境：Flexiv Rizon 4-063079 右臂 + DPVR SDK4 右手柄 RHZC1KS3802；流程：27 点标定复核 → 到达固定初始位姿 → 0.5 m/s、15 周期正弦运动 → 主机墙钟对齐 → 轨迹残差统计。</p>
 <p class="lede">本报告使用原精度报告的页面结构和视觉样式，单独记录机械臂正弦波线速度测试。它不修改或覆盖既有静态精度报告。</p>
 <div class="status-line"><span class="status">0.5 m/s 已完成</span><span class="warning">当前仅纳入已完成的 0.5 m/s 运行，未混入失败运行</span></div>
 <section class="metrics headline-metrics"><div class="metric"><b>0.603 m/s</b><span>机械臂实际轴向最大速度</span><small>0.5 m/s 运行</small></div>
@@ -26,10 +28,12 @@
 
 <section class="section"><div class="eyebrow">01 · Calibration used</div><h2>本轮使用的标定</h2>
 <p class="section-intro">最新可用标定 package 使用 27 个通过一致性和数值复核的姿态：r1-c01, r1-c02, r1-c03, r1-c04, r1-c05, r1-c06, r1-c07, r1-c08, r1-c09, r1-c10, r1-c11, r1-c12, r1-c13, r1-c14, r1-c15, r1-c16, r2-c01, r2-c02, r2-c03, r2-c04, r2-c05, r2-c06, r2-c07, r2-c08, r2-c09, r2-c10, r2-c11。package 本身仍保留正式资格待确认状态，不把待确认标定宣称为正式通过。</p>
+<details class="data-details"><summary>展开标定摘要与全部 27 个点 <span>默认折叠</span></summary><div class="calibration-fold">
 <section class="metrics calibration-metrics"><div class="metric"><b>27</b><span>实际用于计算的标定点</span><small>最新可用 package</small></div><div class="metric"><b>4.07 mm</b><span>平均训练拟合平移残差</span><small>非计量真值</small></div><div class="metric"><b>13.42 mm</b><span>最大训练拟合平移残差</span><small>有效 27 点</small></div><div class="metric"><b>4.25 deg</b><span>最大训练拟合旋转残差</span><small>有效 27 点</small></div></section>
 <div class="velocity-summary"><b>标定点记录说明</b><p>本标定包没有单独标记的排除点。</p></div>
 <div class="table-wrap"><table class="audit-table"><thead><tr><th>标定点</th><th>平移拟合残差</th><th>旋转拟合残差</th></tr></thead><tbody><tr><td>r1-c01</td><td>3.162 mm</td><td>0.679 deg</td></tr><tr><td>r1-c02</td><td>3.661 mm</td><td>3.165 deg</td></tr><tr><td>r1-c03</td><td>6.222 mm</td><td>0.992 deg</td></tr><tr><td>r1-c04</td><td>3.191 mm</td><td>1.422 deg</td></tr><tr><td>r1-c05</td><td>8.654 mm</td><td>1.685 deg</td></tr><tr><td>r1-c06</td><td>2.035 mm</td><td>0.379 deg</td></tr><tr><td>r1-c07</td><td>5.863 mm</td><td>1.007 deg</td></tr><tr><td>r1-c08</td><td>2.401 mm</td><td>1.142 deg</td></tr><tr><td>r1-c09</td><td>2.694 mm</td><td>0.674 deg</td></tr><tr><td>r1-c10</td><td>13.419 mm</td><td>4.245 deg</td></tr><tr><td>r1-c11</td><td>6.817 mm</td><td>3.673 deg</td></tr><tr><td>r1-c12</td><td>2.788 mm</td><td>3.988 deg</td></tr><tr><td>r1-c13</td><td>6.243 mm</td><td>1.033 deg</td></tr><tr><td>r1-c14</td><td>4.999 mm</td><td>1.909 deg</td></tr><tr><td>r1-c15</td><td>7.178 mm</td><td>0.570 deg</td></tr><tr><td>r1-c16</td><td>4.024 mm</td><td>1.140 deg</td></tr><tr><td>r2-c01</td><td>5.189 mm</td><td>1.494 deg</td></tr><tr><td>r2-c02</td><td>1.894 mm</td><td>0.585 deg</td></tr><tr><td>r2-c03</td><td>1.440 mm</td><td>0.774 deg</td></tr><tr><td>r2-c04</td><td>2.142 mm</td><td>2.067 deg</td></tr><tr><td>r2-c05</td><td>2.721 mm</td><td>1.107 deg</td></tr><tr><td>r2-c06</td><td>2.760 mm</td><td>2.303 deg</td></tr><tr><td>r2-c07</td><td>1.277 mm</td><td>0.810 deg</td></tr><tr><td>r2-c08</td><td>2.920 mm</td><td>1.670 deg</td></tr><tr><td>r2-c09</td><td>1.964 mm</td><td>1.288 deg</td></tr><tr><td>r2-c10</td><td>1.729 mm</td><td>1.163 deg</td></tr><tr><td>r2-c11</td><td>2.466 mm</td><td>0.298 deg</td></tr></tbody></table></div>
 <h3>已采集但排除的补采点</h3><div class="table-wrap"><table class="audit-table"><thead><tr><th>点</th><th>采集时间</th><th>排除原因</th><th>16 点复核残差</th></tr></thead><tbody></tbody></table></div>
+</div></details>
 </section>
 
 <section class="section"><div class="eyebrow">02 · Linear velocity test</div><h2>正弦波线速度测试统计</h2>
@@ -50,4 +54,19 @@
 <section class="section"><div class="eyebrow">Appendix · Provenance</div><h2>数据来源与限制</h2>
 <p class="section-intro">本页是新建的线速度测试报告。原有 DPVR 第一次精度报告文件和网站条目没有被修改。</p>
 <ul><li>最新可用标定：<code>/home/syb/yitian/ego-robot-calibration/runs/gui-calibration-20261106-223939-e50470/review/combined-27/calibration/package.json</code></li><li>0.5 m/s 运行：<code>runs/gui-sinusoidal-velocity-run-20261106-221529-7e774f</code></li><li>固定轨迹包：<code>/home/syb/yitian/ego-robot-calibration/runs/sinusoidal-trajectories/dpvr_sdk4-right-Rizon_4-063079.json</code></li><li>标定会话：<code>None</code></li><li>测试会话：<code>dpvr-1793974530029924525</code></li><li>时间戳模型：<code>host_call_midpoint_not_controller_sample_time</code>（机械臂）和 DPVR host wall-clock midpoint（VR）</li><li>本报告统计的是速度和传输时间对齐诊断，不替代静态位置/姿态精度验收。</li></ul>
-</section></main></body></html>
+</section><section class="section"><div class="eyebrow">Appendix · Calculation</div><h2>计算公式与逻辑</h2>
+<ol class="formula-list">
+<li><b>位姿速度：</b><code>v_i = (p_i - p_(i-1)) / (t_i - t_(i-1))</code>。机械臂和 VR 分别在自己的有效时间戳上做有限差分。</li>
+<li><b>DPVR 时间戳：</b><code>t_host = (t_before + t_after) / 2</code>；SDK 查询前后墙钟中点作为该次位姿的主机时间，并保留调用时延证据。</li>
+<li><b>动态时延：</b><code>τ* = argmax corr(v_robot(t), v_vr(t + τ))</code>，在报告给定搜索范围内选择速度相关性最大的偏移。</li>
+<li><b>当前会话锚定：</b><code>T_BW = mean(T_BE · T_EC · inverse(T_WC))</code>，只使用开始阶段静止窗口重建本次 tracking session 的空间原点。</li>
+<li><b>轨迹形状配准：</b><code>(R*, q*) = argmin Σ ||R · p_vr,i + q - p_robot,i||²</code>，用 Kabsch 刚体配准移除新会话的整体坐标原点差异。</li>
+<li><b>逐样本误差：</b><code>e_i = ||R* · p_vr,i + q* - p_robot,i|| × 1000 mm</code>。</li>
+<li><b>汇总：</b><code>mean = Σe_i/N</code>，<code>RMSE = sqrt(Σe_i²/N)</code>，P95 为误差序列第 95 百分位，maximum 为最大值。</li>
+</ol><p class="footnote">运动形状残差同时包含设备跟随误差、测量噪声、剩余时间偏差和结构振动，不应单独解释为标定误差或正式绝对精度。</p></section>
+<section class="section"><div class="eyebrow">Appendix · Raw evidence</div><h2>对应原始文件</h2>
+<p class="section-intro">以下压缩包由本报告实际使用的标定目录和正弦波运行目录重新生成。每个 ZIP 内含 <code>MANIFEST.json</code>，列出完整源路径；视频和音频不参与本报告数学计算，因此未打包。</p>
+<div class="download-grid"><a class="download-item" href="robot-calibration-records.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>机械臂标定原始记录</b><small>标定点、右臂状态、标定 package 与配置</small></span></a>
+<a class="download-item" href="vr-calibration-records.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>VR 标定原始记录</b><small>原始位姿、标准化流与时间同步证据</small></span></a>
+<a class="download-item" href="robot-raw-trajectory.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>机械臂线速度原始记录</b><small>命令、反馈、右臂原始状态与执行摘要</small></span></a>
+<a class="download-item" href="vr-raw-trajectory.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>VR 线速度原始记录</b><small>位姿流、接收信息与时间同步证据</small></span></a></div></section></main></body></html>

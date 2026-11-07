@@ -13,9 +13,11 @@
 .velocity-summary{border:1px solid var(--line);background:#f8fafb;padding:18px;margin:18px 0 26px}
 .velocity-summary p:last-child{margin-bottom:0}.status-fail{border-color:#d59a96;background:#fff1f0;color:#8d2822}
 .audit-table td:last-child,.audit-table th:last-child{text-align:left}
+.report-context{margin:6px 0 12px;color:var(--muted);font-size:12px}.formula-list li{margin:9px 0}
 </style></head><body><main>
 <div class="eyebrow">SKYWORTH E6 · sinusoidal velocity evidence</div>
 <h1>创维 E6 / 右手柄 · 正弦波线速度测试</h1>
+<p class="report-context">实验环境：Flexiv Rizon 4-063079 右臂 + 创维 E6 右手柄；流程：复用 16 点标定 package → 到达与 DPVR 相同初始位姿 → 0.5 m/s、15 周期正弦运动 → USB CDC 仿射墙钟对齐 → 轨迹残差统计。</p>
 <p class="lede">本报告从本次测试的原始机器人反馈、E6 USB/CDC 标准化位姿流和时间同步证据重新计算。页面沿用既有精度报告的样式；不会覆盖历史报告。</p>
 <div class="status-line"><span class="status">已完成</span><span class="warning">仅完成 0.5 m/s；1.0 m/s 和 1.5 m/s 本次没有原始运行数据。</span></div>
 <section class="metrics headline-metrics"><div class="metric"><b>0.5423 m/s</b><span>机械臂实际轴向最大速度</span><small>0.5 m/s 正弦波运行</small></div>
@@ -26,9 +28,11 @@
 
 <section class="section"><div class="eyebrow">01 · Calibration used</div><h2>计算使用的标定</h2>
 <p class="section-intro">本轮沿用测试解锁时实际使用的 E6 标定 package，共 16 个点：c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12, c13, c14, c15, c16。该 package 的资格状态为“待资格确认”，因此下面的结果是线速度/时间同步诊断，不能写成正式绝对精度通过。</p>
+<details class="data-details"><summary>展开标定摘要与全部 16 个点 <span>默认折叠</span></summary><div class="calibration-fold">
 <div class="velocity-summary"><b>资格状态</b><p>hardware_gate_pending:adapter_mapping_robot；hardware_gate_pending:adapter_mapping_vr；hardware_gate_pending:robot_interface；hardware_gate_pending:frame_conventions；hardware_gate_pending:fixture；hardware_gate_pending:clock_static；hardware_gate_pending:robot_baseline</p><p>标定拟合残差仅用于记录 package 状态，不作为本次快速轨迹误差的直接替代。</p></div>
 <section class="metrics calibration-metrics"><div class="metric"><b>16</b><span>使用标定点</span><small>当前实际 package</small></div><div class="metric"><b>4.05 mm</b><span>平均训练拟合平移残差</span><small>非计量真值</small></div><div class="metric"><b>8.45 mm</b><span>最大训练拟合平移残差</span><small>package 诊断</small></div><div class="metric"><b>4.12 deg</b><span>最大训练拟合旋转残差</span><small>package 诊断</small></div></section>
 <div class="table-wrap"><table class="audit-table"><thead><tr><th>标定点</th><th>平移拟合残差</th><th>旋转拟合残差</th></tr></thead><tbody><tr><td>c01</td><td>5.911 mm</td><td>1.064 deg</td></tr><tr><td>c02</td><td>3.491 mm</td><td>1.709 deg</td></tr><tr><td>c03</td><td>3.957 mm</td><td>1.056 deg</td></tr><tr><td>c04</td><td>2.094 mm</td><td>0.242 deg</td></tr><tr><td>c05</td><td>2.231 mm</td><td>0.473 deg</td></tr><tr><td>c06</td><td>5.174 mm</td><td>1.118 deg</td></tr><tr><td>c07</td><td>2.169 mm</td><td>0.542 deg</td></tr><tr><td>c08</td><td>2.927 mm</td><td>0.851 deg</td></tr><tr><td>c09</td><td>3.783 mm</td><td>0.299 deg</td></tr><tr><td>c10</td><td>8.446 mm</td><td>4.123 deg</td></tr><tr><td>c11</td><td>4.361 mm</td><td>0.758 deg</td></tr><tr><td>c12</td><td>2.490 mm</td><td>0.407 deg</td></tr><tr><td>c13</td><td>4.429 mm</td><td>0.684 deg</td></tr><tr><td>c14</td><td>5.061 mm</td><td>1.184 deg</td></tr><tr><td>c15</td><td>6.818 mm</td><td>0.999 deg</td></tr><tr><td>c16</td><td>1.504 mm</td><td>1.282 deg</td></tr></tbody></table></div>
+</div></details>
 </section>
 
 <section class="section"><div class="eyebrow">02 · Linear velocity test</div><h2>0.5 m/s 线速度统计</h2>
@@ -59,4 +63,19 @@
 
 <section class="section"><div class="eyebrow">Appendix · Provenance</div><h2>数据来源</h2>
 <ul><li>原始运行目录：<code>runs/gui-sinusoidal-velocity-run-20261106-235723-4056a4</code></li><li>使用标定：<code>/home/syb/yitian/ego-robot-calibration/runs/gui-calibration-20261016-142004-c29225/calibration/package.json</code></li><li>E6 原始标准化流：<code>e6-normalized.csv</code></li><li>机器人反馈：<code>motion/robot-feedback.jsonl</code></li><li>时间同步证据：<code>raw/timesync/e6-cdc-sync.json</code></li><li>设备时间戳已按 CDC affine source-to-session 映射转换到本机墙钟域；机器人仍使用 host call midpoint，不宣称为控制器内部采样时刻。</li></ul>
-</section></main></body></html>
+</section><section class="section"><div class="eyebrow">Appendix · Calculation</div><h2>计算公式与逻辑</h2>
+<ol class="formula-list">
+<li><b>位姿速度：</b><code>v_i = (p_i - p_(i-1)) / (t_i - t_(i-1))</code>。机械臂和 VR 分别在自己的有效时间戳上做有限差分。</li>
+<li><b>E6 墙钟映射：</b><code>t_host = t_source + offset + drift × (t_source - t_epoch)</code>；offset 和 drift 来自 USB CDC 四时间戳交换的稳健仿射拟合。</li>
+<li><b>动态时延：</b><code>τ* = argmax corr(v_robot(t), v_vr(t + τ))</code>，在报告给定搜索范围内选择速度相关性最大的偏移。</li>
+<li><b>当前会话锚定：</b><code>T_BW = mean(T_BE · T_EC · inverse(T_WC))</code>，只使用开始阶段静止窗口重建本次 tracking session 的空间原点。</li>
+<li><b>轨迹形状配准：</b><code>(R*, q*) = argmin Σ ||R · p_vr,i + q - p_robot,i||²</code>，用 Kabsch 刚体配准移除新会话的整体坐标原点差异。</li>
+<li><b>逐样本误差：</b><code>e_i = ||R* · p_vr,i + q* - p_robot,i|| × 1000 mm</code>。</li>
+<li><b>汇总：</b><code>mean = Σe_i/N</code>，<code>RMSE = sqrt(Σe_i²/N)</code>，P95 为误差序列第 95 百分位，maximum 为最大值。</li>
+</ol><p class="footnote">运动形状残差同时包含设备跟随误差、测量噪声、剩余时间偏差和结构振动，不应单独解释为标定误差或正式绝对精度。</p></section>
+<section class="section"><div class="eyebrow">Appendix · Raw evidence</div><h2>对应原始文件</h2>
+<p class="section-intro">以下压缩包由本报告实际使用的标定目录和正弦波运行目录重新生成。每个 ZIP 内含 <code>MANIFEST.json</code>，列出完整源路径；视频和音频不参与本报告数学计算，因此未打包。</p>
+<div class="download-grid"><a class="download-item" href="robot-calibration-records.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>机械臂标定原始记录</b><small>标定点、右臂状态、标定 package 与配置</small></span></a>
+<a class="download-item" href="vr-calibration-records.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>VR 标定原始记录</b><small>原始位姿、标准化流与时间同步证据</small></span></a>
+<a class="download-item" href="robot-raw-trajectory.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>机械臂线速度原始记录</b><small>命令、反馈、右臂原始状态与执行摘要</small></span></a>
+<a class="download-item" href="vr-raw-trajectory.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b>VR 线速度原始记录</b><small>位姿流、接收信息与时间同步证据</small></span></a></div></section></main></body></html>
