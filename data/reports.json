@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-11-09T02:56:19.539748+00:00",
+  "generated_utc": "2026-11-09T03:51:42.573201+00:00",
   "reports": [
     {
       "id": "1150093702826062300073-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
@@ -14,16 +14,21 @@
       "status": "pending",
       "completed_utc": "2026-11-09T02:56:09.382394+00:00",
       "pose_count": 16,
-      "position_mean_mm": 6.747101642333187,
-      "position_p95_mm": 13.583535376453119,
-      "position_max_mm": 16.81079787586037,
-      "orientation_mean_deg": 0.8335504972230051,
-      "orientation_p95_deg": 1.619639177572368,
-      "orientation_max_deg": 1.755638062372369,
+      "position_mean_mm": 2.6206903133669788,
+      "position_p95_mm": 4.833442456311311,
+      "position_max_mm": 6.086857336018076,
+      "orientation_mean_deg": 0.8305169700835264,
+      "orientation_p95_deg": 1.6287246793293828,
+      "orientation_max_deg": 1.7776033085718164,
       "protocol_profile": "sinusoidal_velocity_diagnostic_v2",
       "task_id": "sinusoidal-skyworth_e6-velocity-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
       "run_id": "run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
-      "report": "reports/1150093702826062300073/run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2/index.html"
+      "report": "reports/1150093702826062300073/run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2/index.html",
+      "primary_label": "运动形状残差均值",
+      "secondary_label": "姿态稳定残差均值",
+      "sample_count": 581,
+      "sample_label": "运动拟合样本",
+      "calibration_pose_count": 16
     },
     {
       "id": "rhzc1ks3802-run-dpvr-sinusoidal-velocity-20261106-27pt",
@@ -46,7 +51,12 @@
       "protocol_profile": "sinusoidal_velocity_diagnostic_v2",
       "task_id": "sinusoidal-dpvr_sdk4-velocity-run-dpvr-sinusoidal-velocity-20261106-27pt",
       "run_id": "run-dpvr-sinusoidal-velocity-20261106-27pt",
-      "report": "reports/rhzc1ks3802/run-dpvr-sinusoidal-velocity-20261106-27pt/index.html"
+      "report": "reports/rhzc1ks3802/run-dpvr-sinusoidal-velocity-20261106-27pt/index.html",
+      "primary_label": "运动形状残差均值",
+      "secondary_label": "姿态稳定残差均值",
+      "sample_count": 377,
+      "sample_label": "运动拟合样本",
+      "calibration_pose_count": 27
     },
     {
       "id": "TIMING_ALIGNMENT_AUDIT-20261102",
