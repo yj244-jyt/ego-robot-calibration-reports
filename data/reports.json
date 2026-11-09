@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-11-09T02:50:39.453695+00:00",
+  "generated_utc": "2026-11-09T02:56:19.539748+00:00",
   "reports": [
     {
       "id": "1150093702826062300073-run-skyworth-e6-sinusoidal-velocity-20261106-235723-v2",
@@ -12,7 +12,7 @@
       "tool_name": "e6-controller-tool",
       "mode": "formal",
       "status": "pending",
-      "completed_utc": "2026-11-09T02:49:27.694979+00:00",
+      "completed_utc": "2026-11-09T02:56:09.382394+00:00",
       "pose_count": 16,
       "position_mean_mm": 6.747101642333187,
       "position_p95_mm": 13.583535376453119,
@@ -35,7 +35,7 @@
       "tool_name": "dpvr-sdk4-right-controller",
       "mode": "formal",
       "status": "pending",
-      "completed_utc": "2026-11-09T02:49:27.671835+00:00",
+      "completed_utc": "2026-11-09T02:55:28.267316+00:00",
       "pose_count": 27,
       "position_mean_mm": 1.427241000841517,
       "position_p95_mm": 2.8571137109529854,
