@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "task_id": "sinusoidal-skyworth_e6-velocity-run-skyworth-e6-sinusoidal-velocity-20261113-114956-normal23-action-chunk-v2",
+  "test_type": "sinusoidal_velocity",
+  "mode": "formal",
+  "pose_count": 23,
+  "speed_trajectory_count": 0,
+  "speed_replay_count": 0,
+  "device_id": "1150093702826062300073",
+  "vr_device": "skyworth_e6",
+  "calibration_arm": "right",
+  "tool_name": "e6-controller-tool",
+  "calibration": "/home/syb/yitian/ego-robot-calibration/runs/gui-calibration-20261113-114039-a0327c/review/normal-points-23-20261113-1158/calibration/package.json",
+  "created_utc": "2026-11-13T05:10:12.897311+00:00",
+  "updated_utc": "2026-11-13T05:10:12.897318+00:00",
+  "status": "completed",
+  "rounds": [
+    {
+      "round_index": 1,
+      "run_id": "run-skyworth-e6-sinusoidal-velocity-20261113-114956-normal23-action-chunk-v2",
+      "report_status": "ready",
+      "report": "/home/syb/yitian/ego-robot-calibration/runs/skyworth-e6-sinusoidal-velocity-report-20261113-114956-normal23-action-chunk-v2/report.json",
+      "html": "/home/syb/yitian/ego-robot-calibration/runs/skyworth-e6-sinusoidal-velocity-report-20261113-114956-normal23-action-chunk-v2/index.html",
+      "completed_utc": "2026-11-13T05:10:12.897372+00:00",
+      "summary": {
+        "kind": "sinusoidal_velocity",
+        "status": "pending",
+        "position_p95_mm": 4.259196066112737,
+        "orientation_p95_deg": 0.8630607814663307
+      }
+    }
+  ]
+}
